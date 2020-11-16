@@ -24,7 +24,7 @@ background-size: 70%
 <br><br><br><br><br><br><br><br><br><br>
 ## Brendan Cullen
 
-### Slides: [`r icon::fa("link")`](https://XXX) [XXX](https://XXX)
+### [`r icon::fa("link")`](https://dplyr-wisely.netlify.app) [dplyr-wisely.netlify.app](https://dplyr-wisely.netlify.app)
 
 
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
@@ -56,8 +56,8 @@ meta() %>%
   meta_name("github-repo" = "brendanhcullen/wisely") %>% 
   meta_social(
     title = 'Using R more "wisely": Column-wise and row-wise operations with dplyr',
-    url = "https://XXX/",
-    image = "https://XXX/share-card.png",
+    url = "https://dplyr-wisely.netlify.app/",
+    image = "https://dplyr-wisely.netlify.app/share-card.png",
     og_type = "website",
     og_author = "Brendan Cullen",
     twitter_card_type = "summary_large_image",
