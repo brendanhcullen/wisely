@@ -4,19 +4,18 @@
     <title>Using R more “wisely”</title>
     <meta charset="utf-8" />
     <meta name="author" content="Brendan Cullen" />
-    <script src="index_files/header-attrs/header-attrs.js"></script>
-    <link href="index_files/remark-css/default.css" rel="stylesheet" />
-    <link href="index_files/remark-css/default-fonts.css" rel="stylesheet" />
-    <link href="index_files/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
-    <link href="index_files/tile-view/tile-view.css" rel="stylesheet" />
-    <script src="index_files/tile-view/tile-view.js"></script>
-    <link href="index_files/panelset/panelset.css" rel="stylesheet" />
-    <script src="index_files/panelset/panelset.js"></script>
-    <script src="index_files/clipboard/clipboard.min.js"></script>
-    <link href="index_files/shareon/shareon.min.css" rel="stylesheet" />
-    <script src="index_files/shareon/shareon.min.js"></script>
-    <link href="index_files/xaringanExtra-shareagain/shareagain.css" rel="stylesheet" />
-    <script src="index_files/xaringanExtra-shareagain/shareagain.js"></script>
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/shareon/shareon.min.css" rel="stylesheet" />
+    <script src="libs/shareon/shareon.min.js"></script>
+    <link href="libs/xaringanExtra-shareagain/shareagain.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-shareagain/shareagain.js"></script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
     <meta name="description" content="Working across multiple rows and columns with the latest updates from dplyr 1.0.0"/>
     <meta name="generator" content="xaringan and remark.js"/>
     <meta name="github-repo" content="brendanhcullen/wisely"/>
@@ -34,6 +33,10 @@
     <meta property="og:type" content="website"/>
     <meta property="og:locale" content="en_US"/>
     <meta property="article:author" content="Brendan Cullen"/>
+    <link href="libs/countdown/countdown.css" rel="stylesheet" />
+    <script src="libs/countdown/countdown.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/custom.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -45,10 +48,10 @@ background-image: url(img/cover_image.png)
 background-position: 50% 50%
 background-size: 70%
 
-# Using R more "wisely":
-## Column-wise &amp; row-wise operations with dplyr
+# Using R more "wisely"
+### Column-wise &amp; row-wise operations with dplyr
 
-&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
 ## Brendan Cullen
 
 ### [<i class="fas  fa-link "></i>](https://dplyr-wisely.netlify.app) [dplyr-wisely.netlify.app](https://dplyr-wisely.netlify.app)
@@ -62,6 +65,7 @@ background-size: 70%
 --shareagain-reddit: none;
 }</style>
 
+&lt;link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'&gt;
 
 &lt;style type="text/css"&gt;
 pre {
@@ -85,43 +89,54 @@ class: inverse, middle, center
 
 ## Brendan Cullen
 
-### Doctoral student &amp; NSF Graduate Research Fellow &lt;br&gt; RStudio Certified Instructor
+#### NSF Graduate Research Fellow, University of Oregon &lt;br&gt; RStudio Certified Instructor
 
-.fade[University of Oregon&lt;br&gt;Eugene, OR, USA]
+.fade[Portland, OR, USA]
 
 [<i class="fas  fa-globe "></i>](https://bcullen.rbind.io/) [bcullen.rbind.io](https://bcullen.rbind.io/) | [<i class="fab  fa-twitter "></i>](https://twitter.com/_bcullen)  [_bcullen](https://twitter.com/_bcullen) | [<i class="fab  fa-github "></i>](https://github.com/brendanhcullen) [brendanhcullen](https://github.com/brendanhcullen)
 
 ---
-# Concept map
+class: inverse, middle, center
 
-![](img/columnwise_concept_map.png)
+# About you
+
+# <i class="fas  fa-user "></i>
+
+--
+
+#### ✅ Familiar with the tidyverse
+
+--
+
+#### ✅ Comfortable with common dplyr verbs, &lt;br&gt; e.g. `mutate()` and `summarize()`
+
+--
+
+#### ✅ Want to more efficiently wrangle &lt;br&gt;and summarize data with dplyr
 
 ---
-class: inverse
+class: inverse, middle, center
 
+# 1️⃣
+# Column-wise operations
+
+---
 # Learning objectives
 
---
 
-- ***Review*** how to apply `dplyr` functions, e.g. `mutate()`, `summarize()`, to single columns
+- Review how to apply `dplyr` functions, e.g. `mutate()`, `summarize()`, to single columns
 
 &lt;br&gt;
---
 
-- ***Learn*** how to perform column-wise operations two ways: 
+- Learn how to perform column-wise operations two ways: 
 
   - scoped verbs, e.g. `summarize_at()`, `summarize_if()`, etc...
 
   - `across()` from `dplyr` 1.0.0
 
---
-
 &lt;br&gt;
 
-- ***Apply*** `across()` to summarize multiple columns of data
-
-&lt;br&gt;
-
+- Apply `across()` to summarize multiple columns of data
 ---
 background-image: url(img/dplyr_hex_old.png)
 background-position: 90% 5%
@@ -190,7 +205,6 @@ Apply `summarize()` to a **single** column.
 --
 
 .panelset[
-
 
 .panel[.panel-name[Example]
 .pull-left[
@@ -272,9 +286,7 @@ Apply `summarize()` to **multiple columns** at once
 
 🔍 `summarize_at()` is an example of a **scoped verb**. It is a special variant of `summarize()` that applies a summary function to a specific set of columns.
 
-⚠️ When using scoped verbs ending in `_at()` you must use `vars()` to select columns. 
-
-❓ How many columns will be in our output? 
+❗ When using scoped verbs ending in `_at()` you must use `vars()` to select columns. 
 ]
 
 
@@ -310,7 +322,7 @@ template: multiple columns
 
 🔍 `summarize_if()` is another example of a **scoped verb**. It is a special variant of `summarize()` that applies a summary function to a set of columns that all satisfy some logical criteria.
 
-🔍 That logical criteria is specified using a **predicate function**, e.g. `is.numeric()`, which will return `TRUE` or `FALSE`.
+That logical criteria is specified using a **predicate function**, e.g. `is.numeric()`, which will return `TRUE` or `FALSE`.
 
 ]
 
@@ -327,20 +339,13 @@ template: multiple columns
 ]
 ]
 ---
-class:inverse, center, middle
-
-# Your Turn #1
-
-### Click [here](https://brendancullen.shinyapps.io/columnwise_operations_formative_assessment/#section-your-turn-1).
-
----
 name: better way
 
 # A better way?
 
 .pull-left[
 .center[
-## `dplyr` &lt; 1.0.0
+### dplyr &lt; 1.0.0
 &lt;img src="img/dplyr_hex_old.png" width="50%" /&gt;
 
 `summarize_at()`, `summarize_if()`, `summarize_all()`, `mutate_if()`, `mutate_at()`, `mutate_all()`, ...
@@ -352,7 +357,7 @@ name: better way
 
 .pull-right[
 .center[
-## `dplyr` &gt;= 1.0.0
+### dplyr &gt;= 1.0.0
 &lt;img src="img/dplyr_hex_new.png" width="50%" /&gt;
 
 `across()`
@@ -369,7 +374,7 @@ background-size: 10%
 # `dplyr::across()`
 
 ![](img/dplyr_across_blank.png)
-.pull-right[Artwork by @allison_horst]
+.footnote[Artwork by @allison_horst]
 
 ---
 background-image: url(img/dplyr_hex_new.png)
@@ -379,14 +384,8 @@ background-size: 10%
 # `dplyr::across()`
 
 ![](img/dplyr_across.png)
-.pull-right[Artwork by @allison_horst]
+.footnote[Artwork by @allison_horst]
 
----
-# `dplyr::across()`
-
-&lt;img src="img/dplyr_across_concept_map.png" width="85%" /&gt;
-
-.footnote[Source: [rstudio/concept-maps](https://github.com/rstudio/concept-maps/#across), courtesy of [Emma Vestesson](https://emmavestesson.netlify.app/)]
 ---
 background-image: url(img/dplyr_hex_new.png)
 background-position: 90% 5%
@@ -399,26 +398,26 @@ background-size: 10%
 
 --
 
-&lt;span style="color: cornflowerblue"&gt; `.cols` &lt;/span&gt; = the columns you want to transform 
+&lt;span style="color: cornflowerblue; font-family:'Source Code Pro'"&gt; .cols &lt;/span&gt; = the columns you want to transform 
 
 &lt;br&gt;
 --
 
-&lt;span style="color: red"&gt;`.fns` &lt;/span&gt; = the function(s) you want to apply to each of the selected columns
+&lt;span style="color: red; font-family:'Source Code Pro'"&gt;.fns &lt;/span&gt; = the function(s) you want to apply to each of the selected columns
 
 &lt;br&gt;
 --
 
-&lt;span style="color: orange"&gt; `...` &lt;/span&gt; = additional arguments for the function(s) specified in `.fns` (e.g. `na.rm = TRUE`)
+&lt;span style="color: orange; font-family:'Source Code Pro'"&gt; ... &lt;/span&gt; = additional arguments for the function(s) specified in `.fns` (e.g. `na.rm = TRUE`)
 
 &lt;br&gt;
 --
 
-&lt;span style="color: darkorchid"&gt; `.names` &lt;/span&gt; = how you want to name the output columns. Here, `"{col}"` is a special placeholder for the input column name, and you can add any suffix you want to it 
+&lt;span style="color: darkorchid; font-family:'Source Code Pro'"&gt; .names &lt;/span&gt; = how you want to name the output columns. Here, `"{col}"` is a special placeholder for the input column name, and you can add any suffix you want to it 
 
 --
 
-- e.g. When calculating the mean of the `year` column, specifying &lt;span style="color: darkorchid"&gt; `.names = "{col}_mean"` &lt;/span&gt; would result in an output column named `"year_mean"`
+- e.g. When calculating the mean of `penguins$year`, specifying &lt;span style="color: darkorchid; font-family:'Source Code Pro'"&gt; .names = "{col}_mean" &lt;/span&gt; would result in an output column named "year_mean"
 
 &lt;br&gt;
 ---
@@ -448,9 +447,9 @@ background-size: 10%
 
 ***
 
-🔍 &lt;span style="color: cornflowerblue"&gt; `where()` &lt;/span&gt; is an example of a `tidyselect` helper function, like `starts_with()` or `contains()`. 
+🔍 &lt;span style="color: cornflowerblue; font-family:'Source Code Pro'"&gt; where() &lt;/span&gt; is an example of a tidyselect helper function, like `starts_with()` or `contains()`. 
 
-It selects the variables for which some **predicate function** , such as &lt;span style="color: cornflowerblue"&gt; `is.numeric()` &lt;/span&gt;, returns `TRUE`. 
+It selects the variables for which some **predicate function**, such as &lt;span style="color: cornflowerblue; font-family:'Source Code Pro'"&gt; is.numeric() &lt;/span&gt; returns `TRUE`. 
 ]
 
 .panel[.panel-name[Output 1.0]
@@ -465,7 +464,7 @@ It selects the variables for which some **predicate function** , such as &lt;spa
 ## # … with 1 more variable: year_mean &lt;dbl&gt;
 ```
 
-👀 Notice that all of the output variables have the suffix `"_mean"`.
+👀 Notice that all of the output variables have the suffix "_mean".
 
 ]
 
@@ -477,9 +476,9 @@ It selects the variables for which some **predicate function** , such as &lt;spa
 
 ***
 
-🔍 If you specify &lt;span style="color: red"&gt; `.funs` &lt;/span&gt; as a named list, e.g. `list(mean = mean)`, then `across()` will automatically append the name of the applied function(s) to the names of the output columns.  
+🔍 If you specify &lt;span style="color: red; font-family:'Source Code Pro'"&gt; .fns &lt;/span&gt; as a named list, e.g. &lt;span style="color: red; font-family:'Source Code Pro'"&gt; list(mean = mean) &lt;/span&gt;, then `across()` will automatically append the name of the applied function(s) to the names of the output columns.  
 
-This way you don't have to manually specify a &lt;span style="color: darkorchid"&gt; `.names` &lt;/span&gt; argument at all! 
+This way you don't have to manually specify a &lt;span style="color: darkorchid; font-family:'Source Code Pro'"&gt; .names &lt;/span&gt; argument at all! 
 ]
 
 
@@ -501,41 +500,552 @@ This way you don't have to manually specify a &lt;span style="color: darkorchid"
 ]
 
 ---
-class:inverse, center, middle
+background-image: url(img/dplyr_hex_new.png)
+background-position: 90% 5%
+background-size: 10%
 
-# Your Turn #2
+# `dplyr::across()`
 
-### Click [here](https://brendancullen.shinyapps.io/columnwise_operations_formative_assessment/#section-your-turn-2).
+Multiple summaries with `across()` -- highly flexible!
+
+
+```r
+penguins %&gt;%
+  group_by(island) %&gt;% 
+  summarize(
+    n = n(),
+    across(where(is.factor), n_distinct),
+    across(where(is.numeric), mean, na.rm = TRUE)
+  )
+```
+
+```
+## # A tibble: 3 x 9
+##   island     n species   sex bill_length_mm bill_depth_mm flipper_length_…
+##   &lt;fct&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;          &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Biscoe   168       2     3           45.3          15.9             210.
+## 2 Dream    124       2     3           44.2          18.3             193.
+## 3 Torge…    52       1     3           39.0          18.4             191.
+## # … with 2 more variables: body_mass_g &lt;dbl&gt;, year &lt;dbl&gt;
+```
 
 ---
-# Concept map
+background-image: url(img/dplyr_hex_new.png)
+background-position: 90% 5%
+background-size: 10%
 
-![](img/columnwise_concept_map.png)
+# `dplyr::across()`
+
+&lt;img src="img/dplyr_across_concept_map.png" width="80%" /&gt;
+
+.footnote[Source: [rstudio/concept-maps](https://github.com/rstudio/concept-maps/#across), by [Emma Vestesson](https://emmavestesson.netlify.app/)]
 
 ---
 class:inverse
+
+# Your Turn 1
+
+<div class="countdown" id="timer_5fbb3d0b" style="right:0;bottom:0;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+.panelset[
+
+.panel[.panel-name[Q1]
+
+Fill in the code blanks below to find the maximum value of all body dimensions (including body mass) for each combination of species and island using `across()`. Specify a `.names` argument so that each output column name ends with the suffix "_max".
+
+
+```r
+penguins %&gt;% 
+  group_by(species, island) %&gt;% 
+  summarize(___(c(___(is.numeric), -year), 
+                   ___, na.rm = TRUE, 
+                   .names = "___"))
+```
+]
+
+.panel[.panel-name[Q2]
+
+Now perform the same calculation again, but this time specify the `.fns` argument using a named list and omit the `.names` argument from `across()`. Be sure that your output columns have the same names as before (i.e. they still end with "_max").
+
+
+```r
+penguins %&gt;% 
+  group_by(species, island) %&gt;% 
+  summarize(___(c(___(is.numeric), -year), 
+                   list(___ = ___), na.rm = TRUE))
+```
+
+]
+]
+
+
+---
+background-image: url(img/dplyr_hex_new.png)
+background-position: 90% 5%
+background-size: 10%
+
+# Column-wise operations
+
+&lt;img src="img/columnwise_concept_map.png" width="85%" /&gt;
+
+.footnote[Source: [rstudio/concept-maps](https://github.com/rstudio/concept-maps/#column-wise-operations)]
+
+---
 # More resources
+
+### Further reading 📖
 
 - [Blog post](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/) by Hadley Wickham highlighting `across()` as a key component of the `dplyr` 1.0.0 update.
 
-&lt;br&gt;
 - [This vignette](https://dplyr.tidyverse.org/articles/colwise.html) on tidyverse.org about column-wise operations.
 
-&lt;br&gt;
 - Two blog posts by Rebecca Barter on [scoped verbs](http://www.rebeccabarter.com/blog/2019-01-23_scoped-verbs/) and [`across()`](http://www.rebeccabarter.com/blog/2020-07-09-across/).
 
-&lt;br&gt;
-- [Interactive tutorial](https://tladeras.shinyapps.io/learning_tidyselect/) by Ted Laderas on `tidyselect` and a [full list](https://dplyr.tidyverse.org/reference/select.html) of selection helpers.
+### Practice 💻
+
+- Small [collection of exercises](https://brendancullen.shinyapps.io/columnwise_operations_formative_assessment/) I put together to accompany these slides
+
+- [Interactive tutorial](https://github.com/laderast/tidyowl#learning_tidyselect) by Ted Laderas on `tidyselect` and a [full list](https://dplyr.tidyverse.org/reference/select.html) of selection helpers.
+
+---
+class: inverse, middle, center
+
+# 2️⃣
+# Row-wise operations
+
+---
+# Learning objectives 
+
+- Learn and apply `rowwise()` to produce row-by-row summaries
+
+&lt;br&gt; 
+
+- Use `nest_by()` to create list-columns
 
 &lt;br&gt;
+
+- Run multiple statistical models on a list-column using `rowwise()`
+
+---
+background-image: url(img/dplyr_hex_new.png)
+background-position: 90% 5%
+background-size: 10%
+
+# Row-wise operations 
+
+`rowwise()` lets you run operations one row at a time on the data. It’s a lot like `group_by()`, but it groups the data by row, rather than group. 
+
+--
+***
+
+What happens when you use `rowwise()` to create a rowwise data frame? 👀
+
+
+```r
+penguins %&gt;% 
+  rowwise()
+```
+
+```
+## # A tibble: 344 x 8
+## # Rowwise: 
+##    species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g
+##    &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt;
+##  1 Adelie  Torge…           39.1          18.7              181        3750
+##  2 Adelie  Torge…           39.5          17.4              186        3800
+##  3 Adelie  Torge…           40.3          18                195        3250
+##  4 Adelie  Torge…           NA            NA                 NA          NA
+##  5 Adelie  Torge…           36.7          19.3              193        3450
+##  6 Adelie  Torge…           39.3          20.6              190        3650
+##  7 Adelie  Torge…           38.9          17.8              181        3625
+##  8 Adelie  Torge…           39.2          19.6              195        4675
+##  9 Adelie  Torge…           34.1          18.1              193        3475
+## 10 Adelie  Torge…           42            20.2              190        4250
+## # … with 334 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;
+```
+
+---
+background-image: url(img/dplyr_hex_new.png)
+background-position: 90% 5%
+background-size: 10%
+
+# Row-wise operations 
+
+Let's say we want to compute the mean of `bill_length_mm` and `bill_depth_mm` for each penguin.
+
+--
+***
+
+❗ Using `mutate()` and `mean()` won't give us what we want.
+
+.panelset[
+
+.panel[.panel-name[Code]
+
+
+```r
+penguins %&gt;%
+  mutate(avg_bill = mean(c(bill_length_mm, bill_depth_mm), na.rm = TRUE)) %&gt;%
+  select(species, island, avg_bill)
+```
+]
+
+.panel[.panel-name[Output]
+
+```
+## # A tibble: 344 x 3
+##    species island    avg_bill
+##    &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;
+##  1 Adelie  Torgersen     30.5
+##  2 Adelie  Torgersen     30.5
+##  3 Adelie  Torgersen     30.5
+##  4 Adelie  Torgersen     30.5
+##  5 Adelie  Torgersen     30.5
+##  6 Adelie  Torgersen     30.5
+##  7 Adelie  Torgersen     30.5
+##  8 Adelie  Torgersen     30.5
+##  9 Adelie  Torgersen     30.5
+## 10 Adelie  Torgersen     30.5
+## # … with 334 more rows
+```
+
+]
+]
+---
+background-image: url(img/dplyr_hex_new.png)
+background-position: 90% 5%
+background-size: 10%
+
+# Row-wise operations 
+
+If we first use `rowwise()` to create a rowwise data frame, then this calculation will be carried out row-by-row (i.e. for each penguin)
+
+.panelset[
+
+.panel[.panel-name[Code]
+
+
+```r
+penguins %&gt;%
+  rowwise() %&gt;%
+  mutate(avg_bill = mean(c(bill_length_mm, bill_depth_mm), na.rm = TRUE)) %&gt;%
+  select(species, island, avg_bill)
+```
+]
+
+.panel[.panel-name[Output]
+
+```
+## # A tibble: 344 x 3
+## # Rowwise: 
+##    species island    avg_bill
+##    &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;
+##  1 Adelie  Torgersen     28.9
+##  2 Adelie  Torgersen     28.4
+##  3 Adelie  Torgersen     29.2
+##  4 Adelie  Torgersen    NaN  
+##  5 Adelie  Torgersen     28  
+##  6 Adelie  Torgersen     30.0
+##  7 Adelie  Torgersen     28.4
+##  8 Adelie  Torgersen     29.4
+##  9 Adelie  Torgersen     26.1
+## 10 Adelie  Torgersen     31.1
+## # … with 334 more rows
+```
+
+]
+]
+
+---
+background-image: url(img/dplyr_hex_new.png)
+background-position: 90% 5%
+background-size: 10%
+
+# Row-wise operations
+
+`c_across()` uses tidy selection syntax so you can to succinctly select many variables at once
+
+.panelset[
+
+.panel[.panel-name[Code]
+
+
+```r
+penguins %&gt;%
+  rowwise() %&gt;%
+  mutate(avg_bill = mean(c_across(contains("bill")), na.rm = TRUE)) %&gt;%
+  select(species, island, avg_bill)
+```
+
+]
+
+.panel[.panel-name[Output]
+
+```
+## # A tibble: 344 x 3
+## # Rowwise: 
+##    species island    avg_bill
+##    &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;
+##  1 Adelie  Torgersen     28.9
+##  2 Adelie  Torgersen     28.4
+##  3 Adelie  Torgersen     29.2
+##  4 Adelie  Torgersen    NaN  
+##  5 Adelie  Torgersen     28  
+##  6 Adelie  Torgersen     30.0
+##  7 Adelie  Torgersen     28.4
+##  8 Adelie  Torgersen     29.4
+##  9 Adelie  Torgersen     26.1
+## 10 Adelie  Torgersen     31.1
+## # … with 334 more rows
+```
+
+]
+]
+
+---
+background-image: url(img/dplyr_hex_new.png)
+background-position: 90% 5%
+background-size: 10%
+
+# List columns
+
+Data frames are not limited to atomic vectors. They can also contain recursive vectors, i.e. **lists**.
+
+A list column can be a list of data frames. 
+
+--
+***
+
+You can create a list column containing data frames using `nest_by()`.
+
+--
+
+.pull-left[
+
+```r
+nested_penguins &lt;- penguins %&gt;% 
+  nest_by(species)
+
+nested_penguins
+```
+
+```
+## # A tibble: 3 x 2
+## # Rowwise:  species
+##   species                 data
+##   &lt;fct&gt;     &lt;list&lt;tbl_df[,7]&gt;&gt;
+## 1 Adelie             [152 × 7]
+## 2 Chinstrap           [68 × 7]
+## 3 Gentoo             [124 × 7]
+```
+]
+
+.pull-right[
+#### Notice the following 👀
+
+- Similar to `group_by()` but it visually changes the structure of the data
+
+- Returns a rowwise data frame
+
+- Default output column name is `data` (can override with `.key` argument)
+]
+
+---
+background-image: url(img/dplyr_hex_new.png)
+background-position: 90% 5%
+background-size: 10%
+
+# List columns
+
+How would you extract the data frame containing the data for Chinstrap penguins out of `nested_penguins`?
+
+--
+
+Notice it does not contain the `species` variable 👀
+
+
+```r
+nested_penguins$data[[2]]
+```
+
+```
+## # A tibble: 68 x 7
+##    island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex    year
+##    &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt; &lt;fct&gt; &lt;int&gt;
+##  1 Dream            46.5          17.9               192        3500 fema…  2007
+##  2 Dream            50            19.5               196        3900 male   2007
+##  3 Dream            51.3          19.2               193        3650 male   2007
+##  4 Dream            45.4          18.7               188        3525 fema…  2007
+##  5 Dream            52.7          19.8               197        3725 male   2007
+##  6 Dream            45.2          17.8               198        3950 fema…  2007
+##  7 Dream            46.1          18.2               178        3250 fema…  2007
+##  8 Dream            51.3          18.2               197        3750 male   2007
+##  9 Dream            46            18.9               195        4150 fema…  2007
+## 10 Dream            51.3          19.9               198        3700 male   2007
+## # … with 58 more rows
+```
+
+---
+background-image: url(img/dplyr_hex_new.png)
+background-position: 90% 5%
+background-size: 10%
+
+# Many models
+
+You can use a rowwise workflow to run a separate model on each data set in a list column.
+
+--
+
+
+```r
+penguins_models &lt;- nested_penguins %&gt;%
+  mutate(model = list(lm(bill_length_mm ~ flipper_length_mm, data = data)))
+
+penguins_models
+```
+
+```
+## # A tibble: 3 x 3
+## # Rowwise:  species
+##   species                 data model 
+##   &lt;fct&gt;     &lt;list&lt;tbl_df[,7]&gt;&gt; &lt;list&gt;
+## 1 Adelie             [152 × 7] &lt;lm&gt;  
+## 2 Chinstrap           [68 × 7] &lt;lm&gt;  
+## 3 Gentoo             [124 × 7] &lt;lm&gt;
+```
+
+---
+background-image: url(img/dplyr_hex_new.png)
+background-position: 90% 5%
+background-size: 10%
+
+# Many models 
+
+However, if we access the model column, you’ll notice that it just prints the output of each fit. 
+
+
+```r
+penguins_models$model[[1]]
+```
+
+```
+## 
+## Call:
+## lm(formula = bill_length_mm ~ flipper_length_mm, data = data)
+## 
+## Coefficients:
+##       (Intercept)  flipper_length_mm  
+##           13.5871             0.1327
+```
+
+--
+
+That output is not super helpful. How can we get more useful information?
+
+---
+background-image: url(img/dplyr_hex_new.png)
+background-position: 90% 5%
+background-size: 10%
+
+# Many models 
+
+We can use functions from the **broom** package to extract summary information about each model in a tidy data frame. 
+
+--
+
+.panelset[
+
+.panel[.panel-name[`broom::tidy()`]
+
+`broom::tidy()` returns a row for each coefficient in the model. Each column gives information about the estimate or its variability.
+
+
+```r
+nested_penguins %&gt;%
+  mutate(model = list(lm(bill_length_mm ~ flipper_length_mm, data = data))) %&gt;%
+  summarize(broom::tidy(model))
+```
+
+]
+
+.panel[.panel-name[Output]
+
+
+```
+## # A tibble: 6 x 6
+## # Groups:   species [3]
+##   species   term              estimate std.error statistic  p.value
+##   &lt;fct&gt;     &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Adelie    (Intercept)         13.6      6.00       2.27  2.49e- 2
+## 2 Adelie    flipper_length_mm    0.133    0.0315     4.21  4.47e- 5
+## 3 Chinstrap (Intercept)          5.59     9.96       0.562 5.76e- 1
+## 4 Chinstrap flipper_length_mm    0.221    0.0508     4.34  4.92e- 5
+## 5 Gentoo    (Intercept)        -20.7      7.04      -2.94  3.88e- 3
+## 6 Gentoo    flipper_length_mm    0.314    0.0324     9.69  8.60e-17
+```
+]
+
+.panel[.panel-name[`broom:glance()`]
+
+`broom::glance()` returns a row for each model. Each column gives a model summary: either a measure of model quality, or complexity, or a combination of the two.
+
+
+```r
+nested_penguins %&gt;%
+  mutate(model = list(lm(bill_length_mm ~ flipper_length_mm, data = data))) %&gt;%
+  summarize(broom::glance(model))
+```
+
+]
+
+.panel[.panel-name[Output]
+
+
+```
+## # A tibble: 3 x 13
+## # Groups:   species [3]
+##   species r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC
+##   &lt;fct&gt;       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 Adelie      0.106         0.100  2.53      17.7 4.47e- 5     1  -353.  712.
+## 2 Chinst…     0.222         0.211  2.97      18.9 4.92e- 5     1  -169.  345.
+## 3 Gentoo      0.437         0.432  2.32      94.0 8.60e-17     1  -277.  560.
+## # … with 4 more variables: BIC &lt;dbl&gt;, deviance &lt;dbl&gt;, df.residual &lt;int&gt;,
+## #   nobs &lt;int&gt;
+```
+]
+]
+
+---
+# More resources
+
+### Further reading 📖
+
+- [Blog post](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-rowwise/) by Hadley Wickham demonstrating helpful use cases for `rowwise()`, e.g. simulations and modeling
+
+- [This vignette](https://dplyr.tidyverse.org/articles/rowwise.html) on tidyverse.org about row-wise operations.
+
+- [Chapter 25](https://r4ds.had.co.nz/many-models.html) from r4ds on "Many models"
+
+### Practice 💻
+
+- [Interactive tutorial](https://github.com/laderast/tidyowl#learning_rowwise-in-development) by Ted Laderas on learning `rowwise()`
+
+---
+# Acknowledgements 
+
+### Much of this material was based on blog posts written by [Hadley Wickham](http://hadley.nz/) and [Rebecca Barter](http://www.rebeccabarter.com/) along with tutorials developed by [Ted Laderas](https://laderast.github.io/), which you can access through his [tidyowl](https://github.com/laderast/tidyowl) package
+
+---
+class: inverse, center, middle
+
+# Thank you! 
+# 🙂
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
-<script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false
-});
+<script>var slideshow = remark.create();
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
@@ -600,24 +1110,7 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
       links[i].target = '_blank';
     }
   }
-})();
-// adds .remark-code-has-line-highlighted class to <pre> parent elements
-// of code chunks containing highlighted lines with class .remark-code-line-highlighted
-(function(d) {
-  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
-  const preParents = [];
-  const findPreParent = function(line, p = 0) {
-    if (p > 1) return null; // traverse up no further than grandparent
-    const el = line.parentElement;
-    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
-  };
-
-  for (let line of hlines) {
-    let pre = findPreParent(line);
-    if (pre && !preParents.includes(pre)) preParents.push(pre);
-  }
-  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
-})(document);</script>
+})();</script>
 
 <script>
 slideshow._releaseMath = function(el) {
