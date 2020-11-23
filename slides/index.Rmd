@@ -26,7 +26,7 @@ background-size: 70%
 <br><br><br><br><br><br><br><br><br>
 ## Brendan Cullen
 
-### [`r icon::fa("link")`](https://dplyr-wisely.netlify.app) [dplyr-wisely.netlify.app](https://dplyr-wisely.netlify.app)
+### `r icon::fa("link")` [dplyr-wisely.netlify.app](https://dplyr-wisely.netlify.app)
 
 
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
@@ -908,3 +908,5 @@ class: inverse, center, middle
 
 # Thank you! 
 # `r emo::ji("slightly_smiling_face")`
+
+### Materials at <br> `r icon::fa("github")` [brendanhcullen/wisely](https://github.com/brendanhcullen/wisely)
