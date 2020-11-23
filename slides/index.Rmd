@@ -901,7 +901,7 @@ nested_penguins %>%
 ---
 # Acknowledgements 
 
-### Much of this material was based on blog posts written by [Hadley Wickham](http://hadley.nz/) and [Rebecca Barter](http://www.rebeccabarter.com/) along with tutorials developed by [Ted Laderas](https://laderast.github.io/), which you can access through his [tidyowl](https://github.com/laderast/tidyowl) package
+Much of this material was based on blog posts written by [Hadley Wickham](http://hadley.nz/) and [Rebecca Barter](http://www.rebeccabarter.com/) along with tutorials developed by [Ted Laderas](https://laderast.github.io/), which you can access through his [tidyowl](https://github.com/laderast/tidyowl) package
 
 ---
 class: inverse, center, middle

@@ -166,27 +166,19 @@ background-size: 10%
 # Palmer Penguins
 
 
-```r
-library(palmerpenguins)
-library(tidyverse)
-```
 
-
-```r
-glimpse(penguins)
-```
 
 ```
 ## Rows: 344
 ## Columns: 8
-## $ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Ade…
-## $ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Torgers…
-## $ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1,…
-## $ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1,…
-## $ flipper_length_mm &lt;int&gt; 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 18…
-## $ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475,…
-## $ sex               &lt;fct&gt; male, female, female, NA, female, male, female, mal…
-## $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 200…
+## $ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adelie,…
+## $ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Torgersen, …
+## $ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1, 42.…
+## $ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1, 20.…
+## $ flipper_length_mm &lt;int&gt; 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 186, 1…
+## $ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, 425…
+## $ sex               &lt;fct&gt; male, female, female, NA, female, male, female, male, N…
+## $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2…
 ```
 
 ---
@@ -225,11 +217,6 @@ Artwork by @allison_horst
 .panel[.panel-name[Code]
 
 
-```r
-penguins %&gt;% 
-  group_by(species) %&gt;% 
-  summarize(bill_length_mm = mean(bill_length_mm, na.rm = TRUE))
-```
 ]
 
 
@@ -282,7 +269,6 @@ Apply `summarize()` to **multiple columns** at once
 
 
 
-&lt;code class ='r hljs remark-code'&gt;penguins %&gt;% &lt;br&gt;&amp;nbsp;&amp;nbsp;group_by(species) %&gt;% &lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;summarize_at&lt;/span&gt;(vars(c(bill_length_mm, bill_depth_mm)), &lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;mean, na.rm = TRUE)&lt;/code&gt;
 
 🔍 `summarize_at()` is an example of a **scoped verb**. It is a special variant of `summarize()` that applies a summary function to a specific set of columns.
 
@@ -318,7 +304,6 @@ template: multiple columns
 
 
 
-&lt;code class ='r hljs remark-code'&gt;penguins %&gt;% &lt;br&gt;&amp;nbsp;&amp;nbsp;group_by(species) %&gt;% &lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;summarize_if&lt;/span&gt;(is.numeric, mean, na.rm = TRUE)&lt;/code&gt;
 
 🔍 `summarize_if()` is another example of a **scoped verb**. It is a special variant of `summarize()` that applies a summary function to a set of columns that all satisfy some logical criteria.
 
@@ -394,7 +379,6 @@ background-size: 10%
 # `dplyr::across()`
 
 
-&lt;code class ='r hljs remark-code'&gt;across(&lt;span style="color:cornflowerblue"&gt;.cols&lt;/span&gt;, &lt;span style="color:red"&gt;.fns&lt;/span&gt;, &lt;span style="color:orange"&gt;...&lt;/span&gt;, &lt;span style="color:darkorchid"&gt;.names&lt;/span&gt;)&lt;/code&gt;
 
 --
 
@@ -428,7 +412,6 @@ background-size: 10%
 # `dplyr::across()`
 
 
-&lt;code class ='r hljs remark-code'&gt;across(&lt;span style="color:cornflowerblue"&gt;.cols&lt;/span&gt;, &lt;span style="color:red"&gt;.fns&lt;/span&gt;, &lt;span style="color:orange"&gt;...&lt;/span&gt;, &lt;span style="color:darkorchid"&gt;.names&lt;/span&gt;)&lt;/code&gt;
 
 .panelset[
 
@@ -443,7 +426,6 @@ background-size: 10%
 
 
 
-&lt;code class ='r hljs remark-code'&gt;penguins %&gt;% &lt;br&gt;&amp;nbsp;&amp;nbsp;group_by(species) %&gt;% &lt;br&gt;&amp;nbsp;&amp;nbsp;summarize(&lt;span style="background-color:#ffff7f"&gt;across&lt;/span&gt;(&lt;span style="color:cornflowerblue"&gt;where(is.numeric)&lt;/span&gt;, &lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color:red"&gt;mean&lt;/span&gt;, &lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color:orange"&gt;na.rm = TRUE&lt;/span&gt;, &lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color:darkorchid"&gt;.names = '{col}_mean'&lt;/span&gt;))&lt;/code&gt;
 
 ***
 
@@ -472,7 +454,6 @@ It selects the variables for which some **predicate function**, such as &lt;span
 
 
 
-&lt;code class ='r hljs remark-code'&gt;penguins %&gt;% &lt;br&gt;&amp;nbsp;&amp;nbsp;group_by(species) %&gt;% &lt;br&gt;&amp;nbsp;&amp;nbsp;summarize(across(&lt;span style="color:cornflowerblue"&gt;where(is.numeric)&lt;/span&gt;, &lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;&lt;span style="color:red"&gt;list(mean = mean)&lt;/span&gt;&lt;/span&gt;, &lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color:orange"&gt;na.rm = TRUE&lt;/span&gt;))&lt;/code&gt;
 
 ***
 
@@ -509,16 +490,6 @@ background-size: 10%
 Multiple summaries with `across()` -- highly flexible!
 
 
-```r
-penguins %&gt;%
-  group_by(island) %&gt;% 
-  summarize(
-    n = n(),
-    across(where(is.factor), n_distinct),
-    across(where(is.numeric), mean, na.rm = TRUE)
-  )
-```
-
 ```
 ## # A tibble: 3 x 9
 ##   island     n species   sex bill_length_mm bill_depth_mm flipper_length_…
@@ -545,7 +516,7 @@ class:inverse
 
 # Your Turn 1
 
-<div class="countdown" id="timer_5fbb3d0b" style="right:0;bottom:0;" data-warnwhen="0">
+<div class="countdown" id="timer_5fbb3e9c" style="right:0;bottom:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -556,13 +527,6 @@ class:inverse
 Fill in the code blanks below to find the maximum value of all body dimensions (including body mass) for each combination of species and island using `across()`. Specify a `.names` argument so that each output column name ends with the suffix "_max".
 
 
-```r
-penguins %&gt;% 
-  group_by(species, island) %&gt;% 
-  summarize(___(c(___(is.numeric), -year), 
-                   ___, na.rm = TRUE, 
-                   .names = "___"))
-```
 ]
 
 .panel[.panel-name[Q2]
@@ -570,12 +534,6 @@ penguins %&gt;%
 Now perform the same calculation again, but this time specify the `.fns` argument using a named list and omit the `.names` argument from `across()`. Be sure that your output columns have the same names as before (i.e. they still end with "_max").
 
 
-```r
-penguins %&gt;% 
-  group_by(species, island) %&gt;% 
-  summarize(___(c(___(is.numeric), -year), 
-                   list(___ = ___), na.rm = TRUE))
-```
 
 ]
 ]
@@ -643,27 +601,22 @@ background-size: 10%
 What happens when you use `rowwise()` to create a rowwise data frame? 👀
 
 
-```r
-penguins %&gt;% 
-  rowwise()
-```
-
 ```
 ## # A tibble: 344 x 8
 ## # Rowwise: 
-##    species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g
-##    &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt;
-##  1 Adelie  Torge…           39.1          18.7              181        3750
-##  2 Adelie  Torge…           39.5          17.4              186        3800
-##  3 Adelie  Torge…           40.3          18                195        3250
-##  4 Adelie  Torge…           NA            NA                 NA          NA
-##  5 Adelie  Torge…           36.7          19.3              193        3450
-##  6 Adelie  Torge…           39.3          20.6              190        3650
-##  7 Adelie  Torge…           38.9          17.8              181        3625
-##  8 Adelie  Torge…           39.2          19.6              195        4675
-##  9 Adelie  Torge…           34.1          18.1              193        3475
-## 10 Adelie  Torge…           42            20.2              190        4250
-## # … with 334 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;
+##    species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g sex  
+##    &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt; &lt;fct&gt;
+##  1 Adelie  Torge…           39.1          18.7              181        3750 male 
+##  2 Adelie  Torge…           39.5          17.4              186        3800 fema…
+##  3 Adelie  Torge…           40.3          18                195        3250 fema…
+##  4 Adelie  Torge…           NA            NA                 NA          NA &lt;NA&gt; 
+##  5 Adelie  Torge…           36.7          19.3              193        3450 fema…
+##  6 Adelie  Torge…           39.3          20.6              190        3650 male 
+##  7 Adelie  Torge…           38.9          17.8              181        3625 fema…
+##  8 Adelie  Torge…           39.2          19.6              195        4675 male 
+##  9 Adelie  Torge…           34.1          18.1              193        3475 &lt;NA&gt; 
+## 10 Adelie  Torge…           42            20.2              190        4250 &lt;NA&gt; 
+## # … with 334 more rows, and 1 more variable: year &lt;int&gt;
 ```
 
 ---
@@ -685,11 +638,6 @@ Let's say we want to compute the mean of `bill_length_mm` and `bill_depth_mm` fo
 .panel[.panel-name[Code]
 
 
-```r
-penguins %&gt;%
-  mutate(avg_bill = mean(c(bill_length_mm, bill_depth_mm), na.rm = TRUE)) %&gt;%
-  select(species, island, avg_bill)
-```
 ]
 
 .panel[.panel-name[Output]
@@ -727,12 +675,6 @@ If we first use `rowwise()` to create a rowwise data frame, then this calculatio
 .panel[.panel-name[Code]
 
 
-```r
-penguins %&gt;%
-  rowwise() %&gt;%
-  mutate(avg_bill = mean(c(bill_length_mm, bill_depth_mm), na.rm = TRUE)) %&gt;%
-  select(species, island, avg_bill)
-```
 ]
 
 .panel[.panel-name[Output]
@@ -772,12 +714,6 @@ background-size: 10%
 .panel[.panel-name[Code]
 
 
-```r
-penguins %&gt;%
-  rowwise() %&gt;%
-  mutate(avg_bill = mean(c_across(contains("bill")), na.rm = TRUE)) %&gt;%
-  select(species, island, avg_bill)
-```
 
 ]
 
@@ -824,13 +760,6 @@ You can create a list column containing data frames using `nest_by()`.
 
 .pull-left[
 
-```r
-nested_penguins &lt;- penguins %&gt;% 
-  nest_by(species)
-
-nested_penguins
-```
-
 ```
 ## # A tibble: 3 x 2
 ## # Rowwise:  species
@@ -866,24 +795,20 @@ How would you extract the data frame containing the data for Chinstrap penguins 
 Notice it does not contain the `species` variable 👀
 
 
-```r
-nested_penguins$data[[2]]
-```
-
 ```
 ## # A tibble: 68 x 7
-##    island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex    year
-##    &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-##  1 Dream            46.5          17.9               192        3500 fema…  2007
-##  2 Dream            50            19.5               196        3900 male   2007
-##  3 Dream            51.3          19.2               193        3650 male   2007
-##  4 Dream            45.4          18.7               188        3525 fema…  2007
-##  5 Dream            52.7          19.8               197        3725 male   2007
-##  6 Dream            45.2          17.8               198        3950 fema…  2007
-##  7 Dream            46.1          18.2               178        3250 fema…  2007
-##  8 Dream            51.3          18.2               197        3750 male   2007
-##  9 Dream            46            18.9               195        4150 fema…  2007
-## 10 Dream            51.3          19.9               198        3700 male   2007
+##    island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex     year
+##    &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt; &lt;fct&gt;  &lt;int&gt;
+##  1 Dream            46.5          17.9               192        3500 female  2007
+##  2 Dream            50            19.5               196        3900 male    2007
+##  3 Dream            51.3          19.2               193        3650 male    2007
+##  4 Dream            45.4          18.7               188        3525 female  2007
+##  5 Dream            52.7          19.8               197        3725 male    2007
+##  6 Dream            45.2          17.8               198        3950 female  2007
+##  7 Dream            46.1          18.2               178        3250 female  2007
+##  8 Dream            51.3          18.2               197        3750 male    2007
+##  9 Dream            46            18.9               195        4150 female  2007
+## 10 Dream            51.3          19.9               198        3700 male    2007
 ## # … with 58 more rows
 ```
 
@@ -898,13 +823,6 @@ You can use a rowwise workflow to run a separate model on each data set in a lis
 
 --
 
-
-```r
-penguins_models &lt;- nested_penguins %&gt;%
-  mutate(model = list(lm(bill_length_mm ~ flipper_length_mm, data = data)))
-
-penguins_models
-```
 
 ```
 ## # A tibble: 3 x 3
@@ -925,10 +843,6 @@ background-size: 10%
 
 However, if we access the model column, you’ll notice that it just prints the output of each fit. 
 
-
-```r
-penguins_models$model[[1]]
-```
 
 ```
 ## 
@@ -962,11 +876,6 @@ We can use functions from the **broom** package to extract summary information a
 `broom::tidy()` returns a row for each coefficient in the model. Each column gives information about the estimate or its variability.
 
 
-```r
-nested_penguins %&gt;%
-  mutate(model = list(lm(bill_length_mm ~ flipper_length_mm, data = data))) %&gt;%
-  summarize(broom::tidy(model))
-```
 
 ]
 
@@ -992,11 +901,6 @@ nested_penguins %&gt;%
 `broom::glance()` returns a row for each model. Each column gives a model summary: either a measure of model quality, or complexity, or a combination of the two.
 
 
-```r
-nested_penguins %&gt;%
-  mutate(model = list(lm(bill_length_mm ~ flipper_length_mm, data = data))) %&gt;%
-  summarize(broom::glance(model))
-```
 
 ]
 
@@ -1006,13 +910,12 @@ nested_penguins %&gt;%
 ```
 ## # A tibble: 3 x 13
 ## # Groups:   species [3]
-##   species r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC
-##   &lt;fct&gt;       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-## 1 Adelie      0.106         0.100  2.53      17.7 4.47e- 5     1  -353.  712.
-## 2 Chinst…     0.222         0.211  2.97      18.9 4.92e- 5     1  -169.  345.
-## 3 Gentoo      0.437         0.432  2.32      94.0 8.60e-17     1  -277.  560.
-## # … with 4 more variables: BIC &lt;dbl&gt;, deviance &lt;dbl&gt;, df.residual &lt;int&gt;,
-## #   nobs &lt;int&gt;
+##   species r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##   &lt;fct&gt;       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 Adelie      0.106         0.100  2.53      17.7 4.47e- 5     1  -353.  712.  721.
+## 2 Chinst…     0.222         0.211  2.97      18.9 4.92e- 5     1  -169.  345.  352.
+## 3 Gentoo      0.437         0.432  2.32      94.0 8.60e-17     1  -277.  560.  569.
+## # … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;
 ```
 ]
 ]
@@ -1035,7 +938,7 @@ nested_penguins %&gt;%
 ---
 # Acknowledgements 
 
-### Much of this material was based on blog posts written by [Hadley Wickham](http://hadley.nz/) and [Rebecca Barter](http://www.rebeccabarter.com/) along with tutorials developed by [Ted Laderas](https://laderast.github.io/), which you can access through his [tidyowl](https://github.com/laderast/tidyowl) package
+Much of this material was based on blog posts written by [Hadley Wickham](http://hadley.nz/) and [Rebecca Barter](http://www.rebeccabarter.com/) along with tutorials developed by [Ted Laderas](https://laderast.github.io/), which you can access through his [tidyowl](https://github.com/laderast/tidyowl) package
 
 ---
 class: inverse, center, middle
