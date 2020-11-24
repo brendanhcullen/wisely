@@ -756,7 +756,7 @@ How would you extract the data frame containing the data for Chinstrap penguins 
 
 --
 
-Notice it does not contain the `species` variable `r emo::ji("eyes")`
+Notice it does not contain the `species` variable `r emo::ji("eyes")`. By default, `.keep = FALSE`.
 
 ```{r}
 nested_penguins$data[[2]]
