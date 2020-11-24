@@ -727,7 +727,8 @@ You can create a list column containing data frames using `nest_by()`.
 
 .pull-left[
 ```{r}
-nested_penguins <- penguins %>% 
+nested_penguins <- 
+  penguins %>% 
   nest_by(species)
 
 nested_penguins
@@ -869,7 +870,9 @@ nested_penguins %>%
 ---
 # Acknowledgements 
 
-Much of this material was based on blog posts written by [Hadley Wickham](http://hadley.nz/) and [Rebecca Barter](http://www.rebeccabarter.com/) along with tutorials developed by [Ted Laderas](https://laderast.github.io/), which you can access through his [tidyowl](https://github.com/laderast/tidyowl) package
+Much of this material was based on blog posts written by [Hadley Wickham](http://hadley.nz/) and [Rebecca Barter](http://www.rebeccabarter.com/) along with tutorials developed by [Ted Laderas](https://laderast.github.io/), which you can access through his [tidyowl](https://github.com/laderast/tidyowl) package. 
+
+Thanks also to [Allison Horst](https://twitter.com/allison_horst) for the great artwork! 
 
 ---
 class: inverse, center, middle

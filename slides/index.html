@@ -568,7 +568,7 @@ background-size: 10%
 ---
 class: inverse, middle, center
 
-<div class="countdown" id="timer_5fbc9fb0" style="right:0;bottom:0;" data-warnwhen="0">
+<div class="countdown" id="timer_5fbd3ab4" style="right:0;bottom:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -790,7 +790,8 @@ You can create a list column containing data frames using `nest_by()`.
 .pull-left[
 
 ```r
-nested_penguins &lt;- penguins %&gt;% 
+nested_penguins &lt;- 
+  penguins %&gt;% 
   nest_by(species)
 
 nested_penguins
@@ -1004,7 +1005,9 @@ nested_penguins %&gt;%
 ---
 # Acknowledgements 
 
-Much of this material was based on blog posts written by [Hadley Wickham](http://hadley.nz/) and [Rebecca Barter](http://www.rebeccabarter.com/) along with tutorials developed by [Ted Laderas](https://laderast.github.io/), which you can access through his [tidyowl](https://github.com/laderast/tidyowl) package
+Much of this material was based on blog posts written by [Hadley Wickham](http://hadley.nz/) and [Rebecca Barter](http://www.rebeccabarter.com/) along with tutorials developed by [Ted Laderas](https://laderast.github.io/), which you can access through his [tidyowl](https://github.com/laderast/tidyowl) package. 
+
+Thanks also to [Allison Horst](https://twitter.com/allison_horst) for the great artwork! 
 
 ---
 class: inverse, center, middle
