@@ -568,7 +568,7 @@ background-size: 10%
 ---
 class: inverse, middle, center
 
-<div class="countdown" id="timer_5fbd3cd3" style="right:0;bottom:0;" data-warnwhen="0">
+<div class="countdown" id="timer_5fbd3f9f" style="right:0;bottom:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -866,7 +866,8 @@ You can use a rowwise workflow to run a separate model on each data set in a lis
 
 
 ```r
-penguins_models &lt;- nested_penguins %&gt;%
+penguins_models &lt;- 
+  nested_penguins %&gt;%
   mutate(model = list(lm(bill_length_mm ~ flipper_length_mm, data = data)))
 
 penguins_models

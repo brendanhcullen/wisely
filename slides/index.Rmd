@@ -774,7 +774,8 @@ You can use a rowwise workflow to run a separate model on each data set in a lis
 --
 
 ```{r penguins_models}
-penguins_models <- nested_penguins %>%
+penguins_models <- 
+  nested_penguins %>%
   mutate(model = list(lm(bill_length_mm ~ flipper_length_mm, data = data)))
 
 penguins_models
