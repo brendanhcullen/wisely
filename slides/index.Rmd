@@ -72,9 +72,6 @@ meta() %>%
     twitter_card_type = "summary_large_image",
     twitter_creator = "@_bcullen"
   )
-
-# your turn counter
-yt_counter <- 0
 ```
 
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
@@ -114,15 +111,12 @@ class: inverse, middle, center
 
 # `r icon::fa("user")`
 
---
 
 #### `r emo::ji("check")` Familiar with the tidyverse
 
---
 
 #### `r emo::ji("check")` Comfortable with common dplyr verbs, <br> e.g. `mutate()` and `summarize()`
 
---
 
 #### `r emo::ji("check")` Want to more efficiently wrangle <br>and summarize data with dplyr
 
@@ -549,50 +543,11 @@ knitr::include_graphics("img/dplyr_across_concept_map.png")
 .footnote[Source: [rstudio/concept-maps](https://github.com/rstudio/concept-maps/#across), by [Emma Vestesson](https://emmavestesson.netlify.app/)]
 
 ---
-class:inverse
-
-# Your Turn `r (yt_counter <- yt_counter + 1)`
-
-```{r echo=FALSE}
-countdown(minutes = 3)
-```
-
-.panelset[
-
-.panel[.panel-name[Q1]
-
-Fill in the code blanks below to find the maximum value of all body dimensions (including body mass) for each combination of species and island using `across()`. Specify a `.names` argument so that each output column name ends with the suffix "_max".
-
-```{r eval=FALSE}
-penguins %>% 
-  group_by(species, island) %>% 
-  summarize(___(c(___(is.numeric), -year), 
-                   ___, na.rm = TRUE, 
-                   .names = "___"))
-```
-]
-
-.panel[.panel-name[Q2]
-
-Now perform the same calculation again, but this time specify the `.fns` argument using a named list and omit the `.names` argument from `across()`. Be sure that your output columns have the same names as before (i.e. they still end with "_max").
-
-```{r eval=FALSE}
-penguins %>% 
-  group_by(species, island) %>% 
-  summarize(___(c(___(is.numeric), -year), 
-                   list(___ = ___), na.rm = TRUE))
-```
-
-]
-]
-
-
----
 background-image: url(img/dplyr_hex_new.png)
 background-position: 90% 5%
 background-size: 10%
 
-# Column-wise operations
+# Recap
 
 ```{r echo=FALSE, out.width="85%"}
 knitr::include_graphics("img/columnwise_concept_map.png")
@@ -617,6 +572,15 @@ knitr::include_graphics("img/columnwise_concept_map.png")
 
 - [Interactive tutorial](https://github.com/laderast/tidyowl#learning_tidyselect) by Ted Laderas on `tidyselect` and a [full list](https://dplyr.tidyverse.org/reference/select.html) of selection helpers.
 
+---
+class: inverse, middle, center
+
+```{r echo=FALSE}
+countdown::countdown(minutes = 5)
+```
+
+
+# Q & A
 ---
 class: inverse, middle, center
 
@@ -909,4 +873,4 @@ class: inverse, center, middle
 # Thank you! 
 # `r emo::ji("slightly_smiling_face")`
 
-### Materials at <br> `r icon::fa("github")` [brendanhcullen/wisely](https://github.com/brendanhcullen/wisely)
+### Materials at <br> `r icon::fa("github")` [github.com/brendanhcullen/wisely](https://github.com/brendanhcullen/wisely)
