@@ -568,7 +568,7 @@ background-size: 10%
 ---
 class: inverse, middle, center
 
-<div class="countdown" id="timer_5fbc86c3" style="right:0;bottom:0;" data-warnwhen="0">
+<div class="countdown" id="timer_5fbc9fb0" style="right:0;bottom:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -730,7 +730,7 @@ background-size: 10%
 
 # Row-wise operations
 
-`c_across()` uses tidy selection syntax so you can to succinctly select many variables at once
+`c_across()` uses tidy selection syntax so you can succinctly select many variables at once
 
 .panelset[
 
@@ -776,7 +776,7 @@ background-size: 10%
 
 # List columns
 
-Data frames are not limited to atomic vectors. They can also contain recursive vectors, i.e. **lists**.
+Data frames are not limited to atomic vectors. They can also contain recursive vectors, i.e. lists in the form of a **list column**.
 
 A list column can be a list of data frames. 
 
@@ -881,6 +881,10 @@ penguins_models
 ## 3 Gentoo             [124 × 7] &lt;lm&gt;
 ```
 
+--
+
+❗ Notice that you must wrap your call to `lm()` inside `list()` in order for the model output to fit into a list column.
+
 ---
 background-image: url(img/dplyr_hex_new.png)
 background-position: 90% 5%
@@ -907,7 +911,7 @@ penguins_models$model[[1]]
 
 --
 
-That output is not super helpful. How can we get more useful information?
+That output is not super helpful. How can we get more useful information? 🤔
 
 ---
 background-image: url(img/dplyr_hex_new.png)
